@@ -1,4 +1,4 @@
-local target = "Trykon The Great"
+local target = "" -- put your leader name there
 local ValidMonsters = {"Wyvern", "Bonebeast", "Necromancer", "Vicious Squire", "Blood Priest", "Lich", "Hero", "Renegade Knight", "Vile Grandmaster", "Undead Gladiator"}
 local MonsterCheck = {}
 local MonsterAmount = 0
