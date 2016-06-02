@@ -110,6 +110,8 @@ if(vocation == "knight") then
 		end
 		end
 		end
+		sleep(math.random(200, 1000))
+		Self.SayToNpc("Bye")
 elseif(vocation == "paladin") then
 	if(Self.Level()>=8) then
 		sleep(math.random(200, 1000))
@@ -205,6 +207,8 @@ elseif(vocation == "paladin") then
 	end
 	end
 	end
+	sleep(math.random(200, 1000))
+		Self.SayToNpc("Bye")
 elseif(vocation == "sorcerer") then
 	if(Self.Level()>=8) then
 		sleep(math.random(200, 1000))
@@ -328,6 +332,8 @@ elseif(vocation == "sorcerer") then
 	end
 	end
 	end
+	sleep(math.random(200, 1000))
+		Self.SayToNpc("Bye")
 elseif(vocation == "druid") then
 	if(Self.Level()>=8) then
 		sleep(math.random(200, 1000))
@@ -447,14 +453,16 @@ elseif(vocation == "druid") then
 		Self.SayToNpc("strong ice strike")
 		sleep(math.random(200, 1000))
 		Self.SayToNpc("Yes")
-	end
-	end
-	end
-	end
-	end
-	end
-	end
-	end
-	end
-	end
+		end
+		end
+		end
+		end
+		end
+		end
+		end
+		end
+		end
+		end
+		sleep(math.random(200, 1000))
+		Self.SayToNpc("Bye")
 end
