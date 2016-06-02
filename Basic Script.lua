@@ -40,10 +40,6 @@ local MinCap = 20
 --- built in reach depo function in client
 --- built in deposit items function in client
 ----------------------------------------------------------------
-local ifbuyHP = false
-local ifbuyAmmo = false
-local ifbuyRunes = false
-----------------------------------------------------------------
 registerEventListener(WALKER_SELECTLABEL, "onWalkerSelectLabel")
 print("Full afk script by Trykon")
 print("Happy Hunting!")
