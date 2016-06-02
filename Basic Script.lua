@@ -2,20 +2,22 @@ local ManaMax = 100
 local ManaMin = 10
 local ManaPot = "mana potion"
 
-local HpMax = 20
-local HpMin = 10
+local HpMax = 0
+local HpMin = 0
 local HpPot = "health potion"
 
-local AmmoMax = 100
-local AmmoMin = 20
+local AmmoMax = 0
+local AmmoMin = 0
 local Ammo = "arrow"
 
 local RuneMax = 0
 local RuneMin = 0
 local RuneName = "avalanche"
 
-local ItemBP = "brocade backpack"
-local GoldBP = "golden backpack"
+local ItemBP = "glooth backpack"
+local GoldBP = "yellow backpack"
+
+local MinCap = 20
 ----------------------------------------------------------------
 --- Walker and labels to set:
 --- start at depo
@@ -37,6 +39,10 @@ local GoldBP = "golden backpack"
 --- way to depo
 --- built in reach depo function in client
 --- built in deposit items function in client
+----------------------------------------------------------------
+local ifbuyHP = false
+local ifbuyAmmo = false
+local ifbuyRunes = false
 ----------------------------------------------------------------
 registerEventListener(WALKER_SELECTLABEL, "onWalkerSelectLabel")
 print("Full afk script by Trykon")
@@ -69,6 +75,7 @@ elseif(labelName == "BuyAmmo") then
 	Self.SayToNpc("trade")
 	wait(200, 1000)
 	Self.ShopBuyItemsUpTo(Ammo, AmmoMax)
+	wait(200, 1000)
 	wait(1000)
 	Walker.Start()
 elseif(labelName == "BuyRunes") then
@@ -78,11 +85,14 @@ elseif(labelName == "BuyRunes") then
 	Self.SayToNpc("trade")
 	wait(200, 1000)
 	Self.ShopBuyItemsUpTo(RuneName, RuneMax)
+	wait(200, 1000)
 	wait(1000)
 	Walker.Start()
 elseif(labelName == "CheckBefore") then
-	if(Self.ItemCount(Ammo, true) < AmmoMax or Self.ItemCount(RuneName, true) < RuneMax or Self.ItemCount(ManaPot, true) < ManaMax or Self.ItemCount(HpPot, true) < HpMax) then
+	if(Self.Cap() < MinCap or Self.ItemCount(HpPot) < HpMax or Self.ItemCount(Ammo) < AmmoMax or Self.ItemCount(RuneName) < RuneMax or Self.ItemCount(ManaPot) < ManaMax) then
 		gotoLabel("RestartBps")
+	else
+		print("Check passed")
 	end
 elseif(labelName == "RestartBps") then
 	Walker.Stop()
@@ -99,8 +109,10 @@ elseif(labelName == "RestartBps") then
 	wait(200)
 	Walker.Start()
 elseif(labelName == "Check") then
-	if(Self.ItemCount(Ammo, true) > AmmoMin or Self.ItemCount(RuneName, true) > RuneMin or Self.ItemCount(ManaPot, true) > ManaMin or Self.ItemCount(HpPot, true) > HpMin) then
+	if(Self.Cap() >= MinCap and Self.ItemCount(Ammo) >= AmmoMin and Self.ItemCount(HpPot) >= HpMin and Self.ItemCount(RuneName) >= RuneMin and Self.ItemCount(ManaPot) >= ManaMin) then
 		gotoLabel("StartHunt")
+	else
+		print("No supplies")
 	end
 end
 end
