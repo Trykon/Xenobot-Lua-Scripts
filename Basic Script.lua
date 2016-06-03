@@ -1,23 +1,25 @@
-local ManaMax = 100
-local ManaMin = 10
-local ManaPot = "mana potion"
+local ManaMax = 300
+local ManaMin = 100
+local ManaPot = "strong mana potion"
 
-local HpMax = 0
-local HpMin = 0
-local HpPot = "health potion"
+local HpMax = 30
+local HpMin = 10
+local HpPot = "great spirit potion"
 
-local AmmoMax = 0
-local AmmoMin = 0
-local Ammo = "arrow"
+local AmmoMax = 900
+local AmmoMin = 300
+local Ammo = "crystalline arrow"
 
 local RuneMax = 0
 local RuneMin = 0
 local RuneName = "avalanche"
 
-local ItemBP = "glooth backpack"
-local GoldBP = "yellow backpack"
+local ItemBP = "deepling backpack"
+local StackBP = "camouflage backpack"
+local GoldBP = "golden backpack"
 
-local MinCap = 20
+local MinCap = 100
+local hardcore = true
 ----------------------------------------------------------------
 --- Walker and labels to set:
 --- start at depo
@@ -53,9 +55,21 @@ if(labelName == "DepositGold") then
 	Self.SayToNpc("yes")
 	wait(1000)
 	Walker.Start()
+elseif(labelName == "Hardcore") then
+	if(hardcore == false) then
+		gotoLabel("SkipHardcore")
+	end
 elseif(labelName == "BuyPots")then
 	Walker.Stop()
 	Self.SayToNpc("hi")
+	wait(200,1000)
+	Self.SayToNpc("vial")
+	wait(200,1000)
+	Self.SayToNpc("yes")
+	wait(200,1000)
+	Self.SayToNpc("yes")
+	wait(200,1000)
+	Self.SayToNpc("yes")
 	wait(200,1000)
 	Self.SayToNpc("trade")
 	wait(200, 1000)
@@ -97,9 +111,13 @@ elseif(labelName == "RestartBps") then
 	Self.OpenMainBackpack(true)
 	Container.GetFirst():OpenChildren(ItemBP)
 	wait(1000)
+	Container.GetFirst():OpenChildren(StackBP)
+	wait(1000)		
 	Container.GetFirst():OpenChildren(GoldBP)
 	wait(1000)		
 	Container.GetByName(ItemBP):Minimize()
+	wait(1000)
+	Container.GetByName(StackBP):Minimize()
 	wait(1000)
 	Container.GetByName(GoldBP):Minimize()
 	wait(200)
